@@ -8,10 +8,14 @@ SECRET_KEY = 'django-insecure-j_89af+30&&4qm*8z9_(^zz8p4-ho8z_m6ylm0s$h!-p@on1_^
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '123.123.123.123', '<your_domain>']
+ALLOWED_HOSTS = os.getenv(
+    'ALLOWED_HOSTS',
+    '127.0.0.1,localhost'
+).split(',')
 
-
-# Application definition
+CSRF_TRUSTED_ORIGINS = [
+    'https://taski.serveblog.net',
+]
 
 INSTALLED_APPS = [
     'api.apps.ApiConfig',
