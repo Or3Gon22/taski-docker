@@ -18,6 +18,8 @@ CSRF_TRUSTED_ORIGINS = os.getenv(
     'https://taski.serveblog.net'
 ).split(',')
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'django.contrib.admin',
