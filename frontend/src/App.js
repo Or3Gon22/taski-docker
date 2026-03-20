@@ -4,6 +4,14 @@ import TaskEditModal from "./components/TaskEditModal";
 import Task from "./components/Task";
 import TabList from "./components/TabList";
 
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) {
+    return parts.pop().split(';').shift();
+  }
+}
+
 axios.interceptors.response.use(function (response) {
   if (response.headers['content-type'] !== 'application/json') {
     alert('unsupport data format in server response')
@@ -11,6 +19,9 @@ axios.interceptors.response.use(function (response) {
   }
   return response;
 });
+
+axios.defaults.withCredentials = true;
+axios.defaults.headers.common['X-CSRFToken'] = getCookie('csrftoken');
 
 const App = () => {
   const [isShowCompleted, setIsShowCompleted] = useState(false);
